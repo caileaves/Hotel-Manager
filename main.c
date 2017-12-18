@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<malloc.h>
 #include<Windows.h>
+
 struct houses
 {
 	int id;
@@ -10,18 +11,20 @@ struct houses
 	double daily_price;
 	double hour_price;
 	double free_nums;
-	struct houses *next;
-}*hhead, *hnwe, *htail;
+};
 
 struct customer
 {
+	int id;
 	char name[10];
 	int id_card;
 	int house_id;
-	int house_type;
+	int house_timetype;
 	int house_time;
-	struct customer *next;
-}*chead, *cnew, *ctail;
+	char house_name[10];
+	double should_pay;
+	double payed;
+};
 
 
 int main()
@@ -36,8 +39,12 @@ int main()
 	
 	fp = fopen("D:\\housetypes.txt", "r");
 	if (fp == NULL) fp = fopen("D:\\housetypes.txt", "w");
-
 	fclose(fp);
+
+	fp = fopen("D:\\customers.txt", "r");
+	if (fp == NULL) fp = fopen("D:\\customers.txt", "w");
+	fclose(fp);
+
 	flag = 0;
 	while (!flag){
 		system("cls");
@@ -125,7 +132,6 @@ int funb()
 		printf("\n请键入您想要执行的操作：\n");
 		printf("\tA.添加房型\n");
 		printf("\tB.删除房型\n");
-		printf("\tC.修改房型\n");
 		printf("\tD.返回上级菜单\n");
 		printf("\tE.退出程序\n");
 		inputa = _getch();
@@ -179,8 +185,6 @@ int funb()
 			}
 			Sleep(1000);
 			break;
-		case 'c':
-
 		case 'd':
 			return 0;
 			break;
@@ -198,7 +202,93 @@ int funb()
 
 int func()
 {
-	return 0;
+	char inputa,getca;
+	struct customer new_cus;
+	struct houses temp_house;
+	FILE *cfp, *housefp;
+	int flag = 0;
+	while (!flag)
+	{
+		system("cls");
+		printf("---------------------客户登记系统---------------------");
+		printf("\n请键入您想要执行的操作：\n");
+		printf("\tA查询客人信息\n");
+		printf("\tB.入住\n");
+		printf("\tC.退房\n");
+		printf("\tD.返回上级菜单\n");
+		printf("\tE.退出系统\n");
+
+		switch (inputa = _getch())
+		{
+		case 'a':  //查询现有顾客信息
+			cfp = fopen("D:\\customers.txt", "r");
+
+			printf("编号 身份证 姓名 时型 时长 应收 实收\n");
+			while (!feof(cfp)){
+				getca = fgetc(cfp);
+				printf("%c", getca);
+			}
+			fclose(cfp);
+			printf("\n按任意键返回\n");
+			_getch();
+			break;
+		case 'b':  //入住办理
+			printf("\n身份证：");
+			scanf("%d", &new_cus.id_card);
+			prntf("\n姓名：");
+			scanf("%s", new_cus.name);
+			printf("\n房型id：");
+			scanf("%d", &new_cus.house_id);
+			printf("\n租住时型(1 按日 2 按时)：");
+			scanf("%d", &new_cus.house_timetype);
+			if (new_cus.house_timetype == 1){  //判断租住时型
+				printf("\n租住日数：");
+			}
+			else if(new_cus.house_timetype==2) printf("\n租住小时数：");
+			else{
+				printf("\n输入不正确！自动改为按小时！");
+				printf("\n租住小时数：");
+				new_cus.house_timetype = 2;
+			}
+			scanf("%d", &new_cus.house_time);
+
+			housefp = fopen("D:\\housetypes.txt", "r");
+			while (!feof(housefp)){  //由顾客输入的房型结算顾客应收金额
+				fscanf(housefp, "%d %s %lf %lf %d\n", &temp_house.id, &temp_house.name, &temp_house.daily_price, &temp_house.hour_price, &temp_house.free_nums);
+				if (temp_house.id == new_cus.house_id){
+					if (new_cus.house_timetype == 1){
+						new_cus.should_pay = temp_house.daily_price*(double)new_cus.house_time;
+						break;
+					}
+					else{
+						new_cus.should_pay = temp_house.hour_price*(double)new_cus.house_time;
+						break;
+					}
+				}
+			}
+			for (int i = 0; temp_house.name[i] != '\n'; i++){  //输入顾客的房型名称
+				new_cus.house_name[i] = temp_house.name[i];
+			}
+			new_cus.house_name[i] = temp_house.name[i];
+			fclose(housefp);
+
+			printf("\n应收：%.1f", new_cus.should_pay);  //输出应收金额
+
+			printf("\n输入已收金额：");
+			scanf("%lf", &new_cus.payed);
+
+
+		case 'd':
+			return 0;
+		case 'e':
+			exit(0);
+		default:
+			printf("输入错误！");
+			Sleep(1000);
+			break;
+		}
+	}
+	
 }
 
 int fund()
