@@ -119,7 +119,7 @@ int funa()
 
 int funb()
 {
-	FILE *fp, *curfp, *tempfp;
+	FILE *fp, *tempfp;
 	char oldname[15] = { "D:\\tp.txt" }, newname[25] = { "D:\\housetypes.txt" };
 	struct houses new_house, temp_house;
 	int tempnum = 100;
@@ -198,6 +198,7 @@ int funb()
 			break;
 		}
 	}
+	return 0;
 }
 
 int func()
@@ -207,6 +208,7 @@ int func()
 	struct houses temp_house;
 	FILE *cfp, *housefp;
 	int flag = 0;
+	int i;
 	while (!flag)
 	{
 		system("cls");
@@ -235,7 +237,7 @@ int func()
 		case 'b':  //入住办理
 			printf("\n身份证：");
 			scanf("%d", &new_cus.id_card);
-			prntf("\n姓名：");
+			printf("\n姓名：");
 			scanf("%s", new_cus.name);
 			printf("\n房型id：");
 			scanf("%d", &new_cus.house_id);
@@ -266,7 +268,7 @@ int func()
 					}
 				}
 			}
-			for (int i = 0; temp_house.name[i] != '\n'; i++){  //输入顾客的房型名称
+			for (i = 0; temp_house.name[i] != '\n'; i++){  //输入顾客的房型名称
 				new_cus.house_name[i] = temp_house.name[i];
 			}
 			new_cus.house_name[i] = temp_house.name[i];
@@ -288,7 +290,7 @@ int func()
 			break;
 		}
 	}
-	
+	return 0;
 }
 
 int fund()
