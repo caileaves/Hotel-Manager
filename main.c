@@ -3,6 +3,10 @@
 #include<conio.h>
 #include<windows.h>
 
+FILE *hotel;
+FILE *cus_now;
+FILE *cus_bef;
+
 struct price
 {
 	int floor; //楼层
