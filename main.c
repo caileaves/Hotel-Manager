@@ -29,7 +29,13 @@ int main() //主函数 程序入口
 int mainlist() //主菜单函数
 {
 	int flag = 0; //标记，作用不明
-
+	int ht_information();
+	int checkin();
+	int checkout();
+	int getprice();
+	int changeprice();
+	int getcus();
+	int history();
 
 
 	while (!flag){
@@ -47,19 +53,26 @@ int mainlist() //主菜单函数
 
 		switch (_getch()){   //VS2013中getch()需要写成_getch() 如用其它编译器请替换
 		case 'a':
-
+			ht_information();
+			break;
 		case 'b':
-
+			checkin();
+			break;
 		case 'c':
-
+			checkout();
+			break; 
 		case 'd':
-
+			getprice();
+			break;
 		case 'e':
-
+			changeprice();
+			break;
 		case 'f':
-
+			getcus();
+			break; 
 		case 'g':
-
+			history();
+			break;
 		case 'z':
 			system("cls");
 			printf("欢迎再次使用酒店信息管理系统！");
