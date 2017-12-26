@@ -12,7 +12,7 @@ struct price
 	int floor; //楼层
 	int price; //价格
 	int state[5]; //用来录入每层每间的住房状态
-	int num; //表示房号
+	int num[5]; //表示房号
 	char name[10]; //套房类型
 };
 
@@ -100,8 +100,7 @@ int mainlist() //主菜单函数
 			break;
 		case 'z':
 			system("cls");
-			printf("欢迎再次使用酒店信息管理系统！");
-			Sleep(1500);
+			printf("欢迎再次使用酒店信息管理系统！\n");
 			exit(0);
 		default:  //输入不正确 
 			system("cls");
@@ -145,7 +144,16 @@ int checkout() //结账退房
 
 int getprice() //房间价格查询
 {
-
+	system("cls");
+	struct price temp;
+	hotel = fopen("D:\\hotel.txt", "r");
+	while (!feof(hotel)){
+		fscanf(hotel,"%s %d %d-%d %d-%d %d-%d %d-%d %d-%d\n",&temp.name,&temp.price,&temp.num[0],&temp.state[0],&temp.num[1],&temp.state[1],&temp.num[2],&temp.state[2]
+			,&temp.num[3],&temp.state[3],&temp.num[4],&temp.state[4]);
+		temp.floor = temp.num[0] / 10;
+		printf("%d楼 %s:\n\t日价:%d\n\n", temp.floor, temp.name, temp.price);
+	}
+	system("pause");
 	return 0;
 }
 
