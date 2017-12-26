@@ -22,6 +22,20 @@ struct customer
 
 int main() //主函数 程序入口
 {
+	FILE *fp;
+	if (fp = fopen("D:\\hotel.txt", "r") == NULL){   //验证是否存在hotel.txt、cus_now.txt，不存在则创建。
+		fclose(fp);
+		fp = fopen("D:\\hotel.txt", "w");
+		fclose(fp);
+	}
+	if (fp = fopen("D:\\cus_now.txt", "r") == NULL){
+		fclose(fp);
+		fp = fopen("D:\\cus_now.txt", "w");
+		fclose(fp);
+	}
+
+
+
 	int mainlist();
 	mainlist(); //调用主菜单
 }
@@ -89,7 +103,20 @@ int mainlist() //主菜单函数
 
 int ht_information()  //酒店信息显示
 {
-
+	system("cls");
+	printf("======欢迎来到本酒店！======");
+	printf("\n酒店概况：\n");
+	printf("\n本酒店装修时间为2017年\n");
+	printf("\n酒店共5层\n");
+	printf("\n每层共10间\n");
+	printf("\n1层单人间 日150元");
+	printf("\n2层大床房 日250元");
+	printf("\n3层亲子房 日300元");
+	printf("\n4层商务大床房 日250元");
+	printf("\n5层总统套房 日9999元");
+	printf("\n\n======欢迎光临！======");
+	printf("\n");
+	system("pause");
 	return 0;
 }
 
