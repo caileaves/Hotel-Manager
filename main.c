@@ -75,16 +75,16 @@ int mainlist() //主菜单函数
 			ht_information();
 			break;
 		case 'b':
-			checkin();
-			break;
-		case 'c':
-			checkout();
-			break;
-		case 'd':
 			getprice();
 			break;
-		case 'e':
+		case 'c':
 			changeprice();
+			break;
+		case 'd':
+			checkin();
+			break;
+		case 'e':
+			checkout();
 			break;
 		case 'f':
 			getcus();
