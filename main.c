@@ -9,9 +9,10 @@ FILE *cus_bef;
 
 struct price
 {
-	int floor; //楼层
-	double price; //价格
-	char name[20]; //套房类型
+	int price; //价格
+	int state[5]; //用来录入每层每间的住房状态
+	int num; //表示房号
+	char name[10]; //套房类型
 };
 
 struct customer
