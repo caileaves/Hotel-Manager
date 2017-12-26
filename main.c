@@ -23,16 +23,18 @@ struct customer
 int main() //主函数 程序入口
 {
 	FILE *fp;
-	if (fp = fopen("D:\\hotel.txt", "r") == NULL){   //验证是否存在hotel.txt、cus_now.txt，不存在则创建。
-		fclose(fp);
-		fp = fopen("D:\\hotel.txt", "w");
-		fclose(fp);
-	}
-	if (fp = fopen("D:\\cus_now.txt", "r") == NULL){
-		fclose(fp);
-		fp = fopen("D:\\cus_now.txt", "w");
-		fclose(fp);
-	}
+	fp = fopen("D:\\hotel.txt", "r");
+	if (fp == NULL) fp = fopen("D:\\hotel.txt", "w");
+	fclose(fp);
+	fp = fopen("D:\\cus_now.txt", "r");
+	if (fp == NULL) fp = fopen("D:\\cus_now.txt", "w");
+	fclose(fp);
+	fp = fopen("D:\\cus_bef.txt", "r");
+	if (fp == NULL) fp = fopen("D:\\cus_bef.txt", "w");
+	fclose(fp);
+	fp = fopen("D:\\history.txt", "r");
+	if (fp == NULL) fp = fopen("D:\\history.txt", "w");
+	fclose(fp);
 
 
 
@@ -43,6 +45,8 @@ int main() //主函数 程序入口
 int mainlist() //主菜单函数
 {
 	int flag = 0; //标记，作用不明
+	char input; //接受收入值
+
 	int ht_information();
 	int checkin();
 	int checkout();
@@ -65,7 +69,8 @@ int mainlist() //主菜单函数
 		printf("\tG.历史结算\n\n");
 		printf("\tZ.退出系统\n");
 
-		switch (_getch()){   //VS2013中getch()需要写成_getch() 如用其它编译器请替换
+		input = _getch();
+		switch (input){   //VS2013中getch()需要写成_getch() 如用其它编译器请替换
 		case 'a':
 			ht_information();
 			break;
@@ -74,7 +79,7 @@ int mainlist() //主菜单函数
 			break;
 		case 'c':
 			checkout();
-			break; 
+			break;
 		case 'd':
 			getprice();
 			break;
@@ -83,7 +88,7 @@ int mainlist() //主菜单函数
 			break;
 		case 'f':
 			getcus();
-			break; 
+			break;
 		case 'g':
 			history();
 			break;
